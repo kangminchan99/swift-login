@@ -14,8 +14,7 @@ class AuthHeaderView: UIView {
         let iv = UIImageView()
         iv.contentMode = .scaleAspectFit
         // 이미지 가져오기
-        iv.image = UIImage(systemName: "yeji")
-        iv.tintColor = .white
+        iv.image = UIImage(named: "yeji")
         return iv
     }()
     
@@ -24,7 +23,7 @@ class AuthHeaderView: UIView {
         label.textColor = .label
         label.textAlignment = .center
         label.font = .systemFont(ofSize: 26, weight: .bold)
-        label.text = "Yeji"
+        label.text = "Error"
         return label
     }()
 
@@ -34,7 +33,7 @@ class AuthHeaderView: UIView {
         label.textColor = .secondaryLabel
         label.textAlignment = .center
         label.font = .systemFont(ofSize: 18, weight: .regular)
-        label.text = "Yeji"
+        label.text = "Error"
         return label
     }()
     
@@ -54,6 +53,8 @@ class AuthHeaderView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    
+    
     // MARK: - UI setup
     private func setupUI() {
         self.addSubview(logoImageView)
@@ -66,12 +67,20 @@ class AuthHeaderView: UIView {
         subtTtleLabel.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            self.logoImageView.topAnchor.constraint(equalTo: self.layoutMarginsGuide.topAnchor, constant: 16),
+            self.logoImageView.topAnchor.constraint(equalTo: self.topAnchor, constant: 30),
             self.logoImageView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
             self.logoImageView.widthAnchor.constraint(equalToConstant: 90),
-            self.logoImageView.heightAnchor.constraint(equalTo: logoImageView.widthAnchor)
+            self.logoImageView.heightAnchor.constraint(equalTo: logoImageView.widthAnchor),
             
-                                     
+            self.titleLabel.topAnchor.constraint(equalTo: logoImageView.bottomAnchor, constant: 19),
+            
+            self.titleLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor),
+            self.titleLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor),
+            
+            
+            self.subtTtleLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 12),
+            self.subtTtleLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor),
+            self.subtTtleLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor)
             ])
     }
 }
