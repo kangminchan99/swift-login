@@ -42,6 +42,8 @@ class LoginController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.navigationBar.isHidden = true
+        
+        self.didTapNewUser()
     }
     
     
@@ -105,14 +107,18 @@ class LoginController: UIViewController {
     
     // MARK: - Selectors
     
-    // 버튼 동작
+    // 버튼 동작 - 페이지 연결
     @objc private func didTapSignIn() {
-        print("Debug:", "didtapSignIn")
+        let vc = HomeController()
+        vc.modalPresentationStyle = .fullScreen
+        self.present(vc, animated: false, completion: nil)
     }
     @objc private func didTapNewUser() {
-        print("Debug:", "didTapNewUser")
+        let vc = RegisterController()
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     @objc private func didTapForgotPassword() {
-        print("Debug:", "didTapForgotPassword")
+        let vc = ForgotPasswordController()
+        self.navigationController?.pushViewController(vc, animated: true)
     }
 }
