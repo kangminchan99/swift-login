@@ -22,12 +22,22 @@ class RegisterController: UIViewController {
     private let signInButton = CustomButtom(title: "Already have an account? Sign In", fontSize: .med)
     
     private let termsTextView: UITextView = {
+
+        
+        let attributedString = NSMutableAttributedString(string: "By creating an account, you agree to our Terms & Conditions and you acknoledge that you have read our Privacy Policy")
+        
+        attributedString.addAttribute(.link, value: "terms://termsAndConditions" ,range: (attributedString.string as NSString).range(of: "Terms & Conditions"))
+        
+        attributedString.addAttribute(.link, value: "privacy://privacyPolicy" ,range: (attributedString.string as NSString).range(of: "Privacy Policy"))
+        
         let tv = UITextView()
-        tv.text = "By creating an account, you agree to our terms $ conditions and you acknoledge that you have read our Privacy Policy"
+        tv.linkTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.systemBlue]
         tv.backgroundColor = .clear
+        tv.attributedText = attributedString
         tv.textColor = .label
         tv.isSelectable = true
         tv.isEditable = false
+        tv.delaysContentTouches = false
         tv.isScrollEnabled = false
         return tv
     }()
@@ -37,6 +47,8 @@ class RegisterController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setupUI()
+        
+        self.termsTextView.delegate = self
         
         self.signUpButton.addTarget(self, action: #selector(didTapSingUp), for: .touchUpInside)
         self.signInButton.addTarget(self, action: #selector(didTapSignIn), for: .touchUpInside)
@@ -138,4 +150,29 @@ class RegisterController: UIViewController {
     
     
     
+}
+
+extension RegisterController: UITextViewDelegate {
+    func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool {
+        
+        if URL.scheme == "terms" {
+            self.showWebViewerController(with: "https://policies.google.com/terms?hl=en")
+        } else if URL.scheme == "privacy" {
+            self.showWebViewerController(with: "https://policies.google.com/privacy?hl=en")
+        }
+        
+        return true
+    }
+    
+    private func showWebViewerController(with urlStirng: String){
+        let vc = WebViewerViewController(with: urlStirng)
+        let nav = UINavigationController(rootViewController: vc)
+        self.present(nav, animated: true, completion: nil)
+    }
+    
+    func textViewDidChange(_ textView: UITextView) {
+        textView.delegate = nil
+        textView.selectedTextRange = nil
+        textView.delegate = self
+    }
 }
