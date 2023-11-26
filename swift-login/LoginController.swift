@@ -109,8 +109,9 @@ class LoginController: UIViewController {
     // 버튼 동작 - 페이지 연결
     @objc private func didTapSignIn() {
         let vc = HomeController()
-        vc.modalPresentationStyle = .fullScreen
-        self.present(vc, animated: false, completion: nil)
+        let nav = UINavigationController(rootViewController: vc)
+        nav.modalPresentationStyle = .fullScreen
+        self.present(nav, animated: false, completion: nil)
     }
     @objc private func didTapNewUser() {
         let vc = RegisterController()
