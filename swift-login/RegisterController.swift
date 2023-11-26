@@ -125,6 +125,10 @@ class RegisterController: UIViewController {
     // 버튼 동작 - 페이지 연결
     @objc func didTapSingUp() {
         print("didTapsignup")
+        let webViewer = WebViewerViewController(with: "https://tenasia.hankyung.com/topic/article/2023080168624")
+        
+        let nav = UINavigationController(rootViewController: webViewer)
+        self.present(nav, animated: true, completion: nil)
     }
  
     @objc private func didTapSignIn() {
