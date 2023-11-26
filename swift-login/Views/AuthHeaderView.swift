@@ -28,7 +28,7 @@ class AuthHeaderView: UIView {
     }()
 
     
-    private let subtTtleLabel: UILabel = {
+    private let subtTitleLabel: UILabel = {
         let label = UILabel()
         label.textColor = .secondaryLabel
         label.textAlignment = .center
@@ -43,7 +43,7 @@ class AuthHeaderView: UIView {
     init(title: String, subTitle: String){
         super.init(frame: .zero)
         self.titleLabel.text = title
-        self.subtTtleLabel.text = subTitle
+        self.subtTitleLabel.text = subTitle
         
         self.setupUI()
         
@@ -59,12 +59,12 @@ class AuthHeaderView: UIView {
     private func setupUI() {
         self.addSubview(logoImageView)
         self.addSubview(titleLabel)
-        self.addSubview(subtTtleLabel)
+        self.addSubview(subtTitleLabel)
         
         
         logoImageView.translatesAutoresizingMaskIntoConstraints = false
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        subtTtleLabel.translatesAutoresizingMaskIntoConstraints = false
+        subtTitleLabel.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
             self.logoImageView.topAnchor.constraint(equalTo: self.topAnchor, constant: 30),
@@ -78,9 +78,9 @@ class AuthHeaderView: UIView {
             self.titleLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor),
             
             
-            self.subtTtleLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 12),
-            self.subtTtleLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor),
-            self.subtTtleLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor)
+            self.subtTitleLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 12),
+            self.subtTitleLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor),
+            self.subtTitleLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor)
             ])
     }
 }

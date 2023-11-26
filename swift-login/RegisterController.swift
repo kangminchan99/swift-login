@@ -145,6 +145,7 @@ class RegisterController: UIViewController {
  
     @objc private func didTapSignIn() {
         self.navigationController?.popToRootViewController(animated: true)
+
     }
     
     
